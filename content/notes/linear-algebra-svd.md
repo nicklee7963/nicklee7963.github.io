@@ -1,6 +1,7 @@
 ---
 title: "Understanding SVD (Singular Value Decomposition)"
 date: 2026-01-21
+math: true
 tags: ["Math", "Linear Algebra", "Machine Learning"]
 summary: "My notes on SVD and its application in image compression."
 ---
