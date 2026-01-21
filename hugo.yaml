@@ -7,27 +7,28 @@ enableInlineShortcodes: true
 
 params:
   # 這是你的副標題：結合生機系、AI與拳擊
-  description: "Biomechatronics Student @ NTU | Robotics & AI Enthusiast | Amateur Boxer"
+  description: "NTU BIME | Robotics & AI Engineer | Amateur Boxer"
   defaultTheme: auto
   
   # 首頁設定 (Profile Mode)
   profileMode:
     enabled: true
-    title: "Li, Li-Hsiang"
-    subtitle: "Biomechatronics Student @ NTU | Robotics & AI Enthusiast | Amateur Boxer"
+    title: "Lee, Li-Hsiang"
+    subtitle: "NTU BIME | Robotics & AI Engineer | Amateur Boxer"
     # 之後可以放照片，現在先留空
-    imageUrl: "" 
+    imageUrl: "selfie.jpg" 
     imageTitle: "My Profile"
     buttons:
       - name: Projects
         url: "/projects"
       - name: Email
-        url: "mailto:你的Email@gmail.com"
+        url: "nicklee7963@gmail.com"
 
   # 社群連結
   socialIcons:
     - name: github
-      url: "https://github.com/你的Github帳號"
+      url: "https://github.com/nicklee7963"
+
 
 # 右上角的導覽列 (對應你要求的五大類別)
 menu:
@@ -48,3 +49,4 @@ menu:
       name: Boxing & Fitness
       url: /about/
       weight: 40
+  
