@@ -21,15 +21,19 @@ params:
     imageUrl: "selfie.jpg"
     imageTitle: "My Profile"
     buttons:
-      - name: Projects
-        url: "/projects"
-      - name: Email
-        url: "mailto:nicklee7963@gmail.com"
 
   # 社群連結
   socialIcons:
     - name: github
       url: "https://github.com/nicklee7963"
+    - name: instagram
+      url: "https://www.instagram.com/_nick.active"
+    - name: youtube
+      url: "https://www.youtube.com/@李立庠"
+    - name: linkedin
+      url: "https://www.linkedin.com/in/你的帳號"
+    - name: email
+      url: "mailto:nicklee7963@gmail.com"
 
 # 選單設定
 menu:
