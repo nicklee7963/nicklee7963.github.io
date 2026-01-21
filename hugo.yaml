@@ -1,0 +1,50 @@
+baseURL: "https://nicklee7963.github.io/"
+title: "Li, Li-Hsiang"
+theme: "PaperMod"
+languageCode: "en-us"
+
+enableInlineShortcodes: true
+
+params:
+  # 這是你的副標題：結合生機系、AI與拳擊
+  description: "Biomechatronics Student @ NTU | Robotics & AI Enthusiast | Amateur Boxer"
+  defaultTheme: auto
+  
+  # 首頁設定 (Profile Mode)
+  profileMode:
+    enabled: true
+    title: "Li, Li-Hsiang"
+    subtitle: "Biomechatronics Student @ NTU | Robotics & AI Enthusiast | Amateur Boxer"
+    # 之後可以放照片，現在先留空
+    imageUrl: "" 
+    imageTitle: "My Profile"
+    buttons:
+      - name: Projects
+        url: "/projects"
+      - name: Email
+        url: "mailto:你的Email@gmail.com"
+
+  # 社群連結
+  socialIcons:
+    - name: github
+      url: "https://github.com/你的Github帳號"
+
+# 右上角的導覽列 (對應你要求的五大類別)
+menu:
+  main:
+    - identifier: projects
+      name: Projects
+      url: /projects/
+      weight: 10
+    - identifier: notes
+      name: Learning Notes
+      url: /notes/
+      weight: 20
+    - identifier: reading
+      name: Reading List
+      url: /reading/
+      weight: 30
+    - identifier: about
+      name: Boxing & Fitness
+      url: /about/
+      weight: 40
