@@ -4,7 +4,7 @@
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="robots" content="noindex, nofollow">
+<meta name="robots" content="index, follow">
 <title>Notes | Lee, Li-Hsiang</title>
 <meta name="keywords" content="">
 <meta name="description" content="Notes - Lee, Li-Hsiang">
@@ -71,6 +71,30 @@
         document.querySelector("html").dataset.theme = 'light';
     }
 
+</script><meta property="og:url" content="http://localhost:1313/notes/">
+  <meta property="og:site_name" content="Lee, Li-Hsiang">
+  <meta property="og:title" content="Notes">
+  <meta property="og:description" content="NTU BIME student&#39;s portfolio">
+  <meta property="og:locale" content="en-us">
+  <meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Notes">
+<meta name="twitter:description" content="NTU BIME student&#39;s portfolio">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Notes",
+      "item": "http://localhost:1313/notes/"
+    }
+  ]
+}
 </script><script>
   MathJax = {
     tex: {
@@ -114,46 +138,172 @@
         </div>
         <ul id="menu">
             <li>
-                <a href="http://localhost:1313/projects/" title="Projects">
+                <a href="http://localhost:1313/projects" title="Projects">
                     <span>Projects</span>
                 </a>
             </li>
             <li>
-                <a href="http://localhost:1313/notes/" title="Learning Notes">
+                <a href="http://localhost:1313/notes" title="Learning Notes">
                     <span class="active">Learning Notes</span>
                 </a>
             </li>
             <li>
-                <a href="http://localhost:1313/reading/" title="Reading List">
+                <a href="http://localhost:1313/reading" title="Reading List">
                     <span>Reading List</span>
                 </a>
             </li>
             <li>
-                <a href="http://localhost:1313/about/" title="Boxing &amp; Fitness">
+                <a href="http://localhost:1313/boxing" title="Boxing &amp; Fitness">
                     <span>Boxing &amp; Fitness</span>
                 </a>
             </li>
         </ul>
     </nav>
 </header>
-<main class="main"> 
-<header class="page-header">
-  <h1>
-    Notes
-  </h1>
-</header>
+<main class="main">
 
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">Understanding SVD (Singular Value Decomposition)
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>My notes on SVD and its application in image compression.</p>
-  </div>
-  <footer class="entry-footer"><span title='2026-01-21 00:00:00 +0000 UTC'>January 21, 2026</span></footer>
-  <a class="entry-link" aria-label="post link to Understanding SVD (Singular Value Decomposition)" href="http://localhost:1313/notes/linear-algebra-svd/"></a>
-</article>
+<div class="scroll-container">
+
+    <section class="scroll-area section-hero" id="hero-section">
+        <div class="content-wrapper center-layout">
+            <h1 class="hero-title">Notes</h1>
+            <p class="hero-subtitle">Sharing my thoughts and technical notes.</p>
+            <div class="scroll-hint">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+    </section>
+
+    <section class="scroll-area list-section" id="list-section">
+        <div class="content-wrapper left-layout">
+            <h2 class="section-label">Latest Notes</h2>
+            <div class="notes-grid">
+                
+                <article class="note-item-animation-wrapper">
+                    <div class="note-card">
+                        <span class="note-meta">Jan 21, 2026</span>
+                        <h3 class="note-title"><a href="http://localhost:1313/notes/linear-algebra-svd/">Understanding SVD (Singular Value Decomposition)</a></h3>
+                        <p class="note-summary">My notes on SVD and its application in image compression.</p>
+                        <a class="read-more" href="http://localhost:1313/notes/linear-algebra-svd/">Explore More →</a>
+                    </div>
+                </article>
+                
+            </div>
+        </div>
+    </section>
+
+</div>
+
+<style>
+     
+    .header {
+        position: fixed !important;
+        top: 0; left: 0;
+        width: 100% !important;  
+        max-width: none !important;
+        z-index: 1000;
+        background: transparent;
+    }
+
+    .nav {
+        max-width: none !important;
+        padding: 0 40px !important;  
+    }
+
+    .main { max-width: none !important; padding: 0 !important; margin: 0 !important; }
+    html, body { overflow: hidden; height: 100%; width: 100%; }
+
+     
+    .scroll-container {
+        height: 100vh; width: 100vw;
+        overflow-y: auto;
+        scroll-snap-type: y mandatory;
+        scroll-behavior: smooth;
+        scrollbar-width: none;
+    }
+    .scroll-container::-webkit-scrollbar { display: none; }
+
+    .scroll-area {
+        height: 100vh; width: 100%;
+        scroll-snap-align: start;
+        display: flex; justify-content: center; align-items: center;
+        position: relative;
+    }
+
+     
+    .content-wrapper { 
+        width: 90%; 
+        max-width: 1100px; 
+    }
+    
+    .center-layout { text-align: center; }
+    .left-layout { text-align: left; display: flex; flex-direction: column; align-items: flex-start; }
+
+     
+    .hero-title { font-size: 6rem; font-weight: 900; margin-bottom: 10px; }
+    .hero-subtitle { font-size: 1.5rem; opacity: 0.7; }
+    
+    .section-label { font-size: 1rem; text-transform: uppercase; letter-spacing: 2px; color: var(--primary); margin-bottom: 40px; }
+
+    .notes-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 30px;
+        width: 100%;
+    }
+
+    .note-card {
+        padding: 25px;
+        background: var(--entry);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        transition: 0.3s;
+    }
+    .note-card:hover { transform: translateY(-5px); border-color: var(--primary); }
+    .note-title { font-size: 1.5rem; margin: 10px 0; }
+    .note-meta { font-family: monospace; font-size: 0.9rem; opacity: 0.6; }
+    .note-summary { font-size: 0.95rem; line-height: 1.6; opacity: 0.8; margin-bottom: 20px; }
+    .read-more { color: var(--primary); font-weight: bold; text-decoration: none; font-size: 0.9rem; }
+
+     
+    .hero-title, .hero-subtitle, .note-item-animation-wrapper, .section-label {
+        opacity: 0;
+        transform: translateY(40px);
+        transition: all 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .visible .hero-title { opacity: 1; transform: translateY(0); transition-delay: 0.1s; }
+    .visible .hero-subtitle { opacity: 1; transform: translateY(0); transition-delay: 0.3s; }
+    .visible .section-label { opacity: 1; transform: translateY(0); transition-delay: 0.1s; }
+    
+     
+    .visible .note-item-animation-wrapper:nth-child(1) { opacity: 1; transform: translateY(0); transition-delay: 0.2s; }
+    .visible .note-item-animation-wrapper:nth-child(2) { opacity: 1; transform: translateY(0); transition-delay: 0.3s; }
+    .visible .note-item-animation-wrapper:nth-child(3) { opacity: 1; transform: translateY(0); transition-delay: 0.4s; }
+
+     
+    .scroll-hint { position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%); }
+    .scroll-hint span { display: block; width: 18px; height: 18px; border-bottom: 2px solid var(--primary); border-right: 2px solid var(--primary); transform: rotate(45deg); margin: -8px; animation: arrow 2s infinite; }
+    @keyframes arrow { 0% { opacity: 0; transform: rotate(45deg) translate(-15px, -15px); } 50% { opacity: 1; } 100% { opacity: 0; transform: rotate(45deg) translate(15px, 15px); } }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                } else {
+                    entry.target.classList.remove('visible'); 
+                }
+            });
+        }, { threshold: 0.3 });
+
+        document.querySelectorAll('.scroll-area').forEach(section => observer.observe(section));
+    });
+</script>
+
+
     </main>
     
 <footer class="footer">

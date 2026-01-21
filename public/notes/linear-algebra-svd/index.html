@@ -4,7 +4,7 @@
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="robots" content="noindex, nofollow">
+<meta name="robots" content="index, follow">
 <title>Understanding SVD (Singular Value Decomposition) | Lee, Li-Hsiang</title>
 <meta name="keywords" content="Math, Linear Algebra, Machine Learning">
 <meta name="description" content="My notes on SVD and its application in image compression.">
@@ -70,6 +70,71 @@
         document.querySelector("html").dataset.theme = 'light';
     }
 
+</script><meta property="og:url" content="http://localhost:1313/notes/linear-algebra-svd/">
+  <meta property="og:site_name" content="Lee, Li-Hsiang">
+  <meta property="og:title" content="Understanding SVD (Singular Value Decomposition)">
+  <meta property="og:description" content="My notes on SVD and its application in image compression.">
+  <meta property="og:locale" content="en-us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="notes">
+    <meta property="article:published_time" content="2026-01-21T00:00:00+00:00">
+    <meta property="article:modified_time" content="2026-01-21T00:00:00+00:00">
+    <meta property="article:tag" content="Math">
+    <meta property="article:tag" content="Linear Algebra">
+    <meta property="article:tag" content="Machine Learning">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Understanding SVD (Singular Value Decomposition)">
+<meta name="twitter:description" content="My notes on SVD and its application in image compression.">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Notes",
+      "item": "http://localhost:1313/notes/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Understanding SVD (Singular Value Decomposition)",
+      "item": "http://localhost:1313/notes/linear-algebra-svd/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Understanding SVD (Singular Value Decomposition)",
+  "name": "Understanding SVD (Singular Value Decomposition)",
+  "description": "My notes on SVD and its application in image compression.",
+  "keywords": [
+    "Math", "Linear Algebra", "Machine Learning"
+  ],
+  "articleBody": "In my journey learning Computer Vision, I realized that Linear Algebra is the engine behind everything. Here is my breakdown of SVD.\nThe Concept Every matrix $A$ can be decomposed into three matrices:\n$$A = U \\Sigma V^T$$\nWhere:\n$U$: Left singular vectors (Orthonormal) $\\Sigma$: Singular values (Diagonal scaling matrix) $V^T$: Right singular vectors Application in Image Processing In my recent experiment, I used SVD to compress an image by keeping only the top $k$ singular values. This significantly reduced the file size while maintaining visual structure.\n",
+  "wordCount" : "87",
+  "inLanguage": "en",
+  "datePublished": "2026-01-21T00:00:00Z",
+  "dateModified": "2026-01-21T00:00:00Z",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "http://localhost:1313/notes/linear-algebra-svd/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Lee, Li-Hsiang",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "http://localhost:1313/favicon.ico"
+    }
+  }
+}
 </script><script>
   MathJax = {
     tex: {
@@ -113,22 +178,22 @@
         </div>
         <ul id="menu">
             <li>
-                <a href="http://localhost:1313/projects/" title="Projects">
+                <a href="http://localhost:1313/projects" title="Projects">
                     <span>Projects</span>
                 </a>
             </li>
             <li>
-                <a href="http://localhost:1313/notes/" title="Learning Notes">
+                <a href="http://localhost:1313/notes" title="Learning Notes">
                     <span>Learning Notes</span>
                 </a>
             </li>
             <li>
-                <a href="http://localhost:1313/reading/" title="Reading List">
+                <a href="http://localhost:1313/reading" title="Reading List">
                     <span>Reading List</span>
                 </a>
             </li>
             <li>
-                <a href="http://localhost:1313/about/" title="Boxing &amp; Fitness">
+                <a href="http://localhost:1313/boxing" title="Boxing &amp; Fitness">
                     <span>Boxing &amp; Fitness</span>
                 </a>
             </li>
@@ -150,7 +215,8 @@
   <div class="post-content"><p>In my journey learning Computer Vision, I realized that <strong>Linear Algebra</strong> is the engine behind everything. Here is my breakdown of SVD.</p>
 <h3 id="the-concept">The Concept<a hidden class="anchor" aria-hidden="true" href="#the-concept">#</a></h3>
 <p>Every matrix $A$ can be decomposed into three matrices:</p>
-$$A = U \Sigma V^T$$<p>Where:</p>
+<p>$$A = U \Sigma V^T$$</p>
+<p>Where:</p>
 <ul>
 <li>$U$: Left singular vectors (Orthonormal)</li>
 <li>$\Sigma$: Singular values (Diagonal scaling matrix)</li>

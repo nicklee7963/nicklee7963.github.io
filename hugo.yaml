@@ -1,28 +1,37 @@
+# 1. 最頂層的設定必須是字串，不能縮進
 baseURL: "https://nicklee7963.github.io/"
+languageCode: "en-us"
 title: "Lee, Li-Hsiang"
 theme: "PaperMod"
-languageCode: "en-us"
 
-enableInlineShortcodes: true
+menu:
+  main:
+    - name: Projects
+      url: /projects
+      weight: 10
+    - name: Learning Notes
+      url: /notes
+      weight: 20
+    - name: Reading List
+      url: /reading
+      weight: 30
+    - name: Boxing & Fitness
+      url: /boxing
+      weight: 40
 
+# 2. params 是一個大分類，底下的東西才要縮進
 params:
-  # 全站預設開啟數學支援
-  math: true
+  env: "production"
+  description: "NTU BIME student's portfolio"
   
-  # 網站描述
-  description: "NTU BIME | Robotics & AI Engineer | Amateur Boxer"
-  defaultTheme: auto
-  
-  # 首頁 Profile Mode 設定
+  # 3. profileMode 縮進兩格
   profileMode:
     enabled: true
     title: "Lee, Li-Hsiang"
     subtitle: "NTU BIME | Robotics & AI Engineer | Amateur Boxer"
     imageUrl: "selfie.jpg"
-    imageTitle: "My Profile"
-    buttons:
 
-  # 社群連結
+  # 4. socialIcons 也縮進兩格，與 profileMode 平行
   socialIcons:
     - name: github
       url: "https://github.com/nicklee7963"
@@ -34,43 +43,3 @@ params:
       url: "https://www.linkedin.com/in/你的帳號"
     - name: email
       url: "mailto:nicklee7963@gmail.com"
-
-# 選單設定
-menu:
-  main:
-    - identifier: projects
-      name: Projects
-      url: /projects/
-      weight: 10
-    - identifier: notes
-      name: Learning Notes
-      url: /notes/
-      weight: 20
-    - identifier: reading
-      name: Reading List
-      url: /reading/
-      weight: 30
-    - identifier: about
-      name: Boxing & Fitness
-      url: /about/
-      weight: 40
-
-# 這是最重要的部分：數學符號渲染設定
-markup:
-  goldmark:
-    renderer:
-      unsafe: true
-    extensions:
-      passthrough:
-        enable: true
-        delimiters:
-          block:
-          - - \[
-            - \]
-          - - $$
-            - $$
-          inline:
-          - - \(
-            - \)
-          - - $
-            - $

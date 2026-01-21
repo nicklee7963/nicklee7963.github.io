@@ -1,0 +1,173 @@
+{{ define "main" }}
+
+<div class="reading-list-wrapper">
+    <header class="page-header reading-header-animation">
+        <h1>{{ .Title }}</h1>
+        {{- if .Description }}
+        <div class="post-description">
+            {{ .Description }}
+        </div>
+        {{- end }}
+    </header>
+
+    <div class="book-list-container">
+        {{- range $index, $page := .Pages }}
+        <article class="book-card item-animation-wrapper">
+            <div class="book-cover-wrapper">
+                {{- if .Params.cover.image }}
+                <a href="{{ .Permalink }}">
+                    <img src="{{ .Params.cover.image | absURL }}" alt="{{ .Params.cover.alt | default .Title }}">
+                </a>
+                {{- end }}
+            </div>
+
+            <div class="book-content-wrapper">
+                <div class="book-header">
+                    <span class="book-date">{{ .Date.Format "2006-01-02" }}</span>
+                    <h2 class="book-title">
+                        <a href="{{ .Permalink }}">{{ .Title }}</a>
+                    </h2>
+                </div>
+
+                <div class="book-excerpt">
+                    {{ .Description | default .Summary }}
+                </div>
+
+                <div class="book-footer">
+                    <a class="read-more-btn" href="{{ .Permalink }}">READ MORE +</a>
+                </div>
+            </div>
+        </article>
+        {{- end }}
+    </div>
+</div>
+
+<style>
+    /* --- 1. 強制頂部標籤全寬 (與主頁同步) --- */
+    .header {
+        position: fixed !important;
+        top: 0; left: 0;
+        width: 100vw !important;
+        max-width: none !important;
+        z-index: 1000;
+        background: rgba(var(--theme), 0.8);
+        backdrop-filter: blur(8px);
+    }
+
+    .nav {
+        display: flex;
+        justify-content: space-between;
+        width: 100% !important;
+        max-width: none !important;
+        padding: 0 40px !important;
+        box-sizing: border-box;
+    }
+
+    .main {
+        max-width: none !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        width: 100vw;
+    }
+
+    /* --- 2. 內容寬度與邊距控制 --- */
+    .reading-list-wrapper {
+        width: 90%;
+        max-width: 1100px; /* 統一內容寬距 */
+        margin: 120px auto 60px; /* 預留上方 Header 的空間 */
+    }
+
+    .page-header {
+        margin-bottom: 50px;
+        text-align: left; /* 與 About Me 一致置左 */
+    }
+
+    /* --- 3. 保留原本的書櫃佈局 --- */
+    .book-list-container {
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+    }
+
+    .book-card {
+        display: flex;
+        background: var(--entry);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 20px;
+        gap: 24px;
+        transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .book-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    }
+
+    .book-cover-wrapper { flex: 0 0 140px; max-width: 140px; }
+    .book-cover-wrapper img { width: 100%; height: auto; border-radius: 4px; object-fit: cover; box-shadow: 0 4px 8px rgba(0,0,0,0.2); }
+    .book-content-wrapper { flex: 1; display: flex; flex-direction: column; justify-content: space-between; }
+    .book-date { font-size: 14px; color: var(--secondary); margin-bottom: 4px; display: block; }
+    .book-title { font-size: 22px; margin: 0 0 10px 0; font-weight: 700; }
+    .book-excerpt { font-size: 15px; color: var(--secondary); line-height: 1.6; margin-bottom: 15px; }
+    .book-footer { display: flex; justify-content: flex-end; }
+
+    .read-more-btn {
+        background-color: #3b82f6;
+        color: white;
+        padding: 8px 18px;
+        border-radius: 4px;
+        font-size: 13px;
+        font-weight: bold;
+        text-decoration: none;
+        transition: background 0.2s;
+    }
+    .read-more-btn:hover { background-color: #2563eb; }
+
+    /* --- 4. 浮現動畫初始狀態 --- */
+    .reading-header-animation, .item-animation-wrapper {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    /* 當進入視線時的狀態 */
+    .visible {
+        opacity: 1 !important;
+        transform: translateY(0) !important;
+    }
+
+    /* 手機版 RWD */
+    @media (max-width: 600px) {
+        .book-card { flex-direction: column; }
+        .book-cover-wrapper { flex: 0 0 auto; max-width: 100%; text-align: center; }
+        .book-cover-wrapper img { width: 120px; }
+    }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const observerOptions = {
+            threshold: 0.15 // 只要卡片出現 15% 就觸發動畫
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                } else {
+                    // 如果你想要重複動畫（滑上去再滑下來會重跑），就保留這行
+                    entry.target.classList.remove('visible');
+                }
+            });
+        }, observerOptions);
+
+        // 監聽標題與所有卡片
+        observer.observe(document.querySelector('.reading-header-animation'));
+        document.querySelectorAll('.item-animation-wrapper').forEach(item => {
+            observer.observe(item);
+        });
+    });
+</script>
+
+{{ end }}

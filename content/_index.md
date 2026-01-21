@@ -25,5 +25,5 @@ I follow a strict **Push/Pull/Legs (PPL)** program.
 Consistency in the gym fuels my focus in the lab.
 
 ### 📬 Contact
-* **Email:** (你的Email)
+* **Email:** [nicklee7963@gmail.com](mailto:nicklee7963@gmail.com)
 * **GitHub:** [github.com/nicklee7963](https://github.com/nicklee7963)

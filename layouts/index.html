@@ -1,79 +1,151 @@
-{{- define "main" }}
-{{- if .Site.Params.profileMode.enabled }}
-{{- partial "index_profile.html" . }}
+{{ define "main" }}
 
-    <div class="post-content" style="margin-top: -80px;">
-        {{ .Content }}
-    </div>
+<div class="side-nav">
+    <div class="nav-dot active" onclick="scrollToSection('profile-section')"></div>
+    <div class="nav-dot" onclick="scrollToSection('about-section')"></div>
+</div>
 
-{{- else }}
-    {{- /* Posts */ -}}
-    {{- $pages := union .RegularPages .Sections }}
+<div class="scroll-container">
 
-    {{- if .IsHome }}
-        {{- $pages = where site.RegularPages "Type" "in" site.Params.mainSections }}
-        {{- $pages = where $pages "Params.hiddenInHomeList" "!=" true  }}
-    {{- end }}
-
-    {{- $paginator := .Paginate $pages }}
-
-    {{- if and .IsHome .Site.Params.homeInfoParams (eq $paginator.PageNumber 1) }}
-        {{- partial "home_info.html" . }}
-    {{- end }}
-
-    {{- $term := .Data.Term }}
-    {{- range $index, $page := $paginator.Pages }}
-
-        {{- $class := "post-entry" }}
-
-        {{- $user_term := $term }}
-        {{- if not $user_term }}
-            {{- $user_term = $page.Page.Params.term }}
-        {{- end }}
-
-        {{- if $user_term }}
-            {{- $class = printf "%s tag-entry" $class }}
-        {{- end }}
-
-        {{- if $page.Params.weight }}
-            {{- $class = printf "%s weight-%d" $class $page.Params.weight }}
-        {{- end }}
-
-        <article class="{{ $class }}">
-            {{- $isHidden := (.Site.Params.cover.hidden | default site.Params.cover.hiddenInList) }}
-            {{- partial "cover.html" (dict "cxt" . "IsHome" true "isHidden" $isHidden) }}
-            <header class="entry-header">
-                <h2>
-                    {{- .Title }}
-                    {{- if .Draft }}<div class="entry-isdraft"><sup>&nbsp;&nbsp;[draft]</sup></div>{{- end }}
-                </h2>
-            </header>
-            {{- if (ne (.Param "hideSummary") true) }}
-            <div class="entry-content">
-                <p>{{ .Summary | plainify | htmlUnescape }}{{ if .Truncated }}...{{ end }}</p>
+    <section class="scroll-area profile-slide" id="profile-section">
+        <div class="content-wrapper center-layout">
+            {{- if .Site.Params.profileMode.enabled }}
+            <div class="profile-animation-wrapper">
+                {{- partial "index_profile.html" . }}
             </div>
             {{- end }}
-            {{- if not (.Param "hideMeta") }}
-            <footer class="entry-footer">
-                {{- partial "post_meta.html" . }}
-            </footer>
-            {{- end }}
-            <a class="entry-link" aria-label="post link to {{ .Title | plainify }}" href="{{ .Permalink }}"></a>
-        </article>
-    {{- end }}
+        </div>
+        
+        <div class="scroll-hint">
+            <span></span><span></span><span></span>
+        </div>
+    </section>
 
-    {{- if gt $paginator.TotalPages 1 }}
-    <footer class="page-footer">
-        <nav class="pagination">
-            {{- if $paginator.HasPrev }}
-            <a class="prev" href="{{ $paginator.Prev.URL | absURL }}">« {{ i18n "prev_page" }}</a>
-            {{- end }}
-            {{- if $paginator.HasNext }}
-            <a class="next" href="{{ $paginator.Next.URL | absURL }}">{{ i18n "next_page" }} »</a>
-            {{- end }}
-        </nav>
-    </footer>
-    {{- end }}
+    <section class="scroll-area content-slide" id="about-section">
+        <div class="content-wrapper left-layout">
+            <h2 class="section-title">About Me</h2>
+            <div class="post-content-animation-wrapper">
+                <div class="post-content about-text">
+                    {{ .Content }}
+                </div>
+            </div>
+        </div>
+    </section>
 
-{{- end }}
-{{- end }}{{/* end profileMode */}}
+</div>
+
+<style>
+    /* --- 1. 強制找回並固定 Header --- */
+    .header {
+        position: fixed !important; /* 固定在最上面 */
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 1000; /* 確保在所有東西之上 */
+        background: transparent; /* 背景透明，或是 var(--theme) */
+    }
+
+    .nav {
+        max-width: none !important; /* 讓導覽列可以貼邊 */
+        padding: 0 40px !important;
+    }
+
+    /* --- 2. 基礎設置 --- */
+    .main { max-width: none !important; padding: 0 !important; margin: 0 !important; }
+    html, body { overflow: hidden; height: 100%; width: 100%; }
+
+    .scroll-container {
+        height: 100vh; width: 100vw; overflow-y: auto;
+        scroll-snap-type: y mandatory; scroll-behavior: smooth;
+        -ms-overflow-style: none; scrollbar-width: none;
+    }
+    .scroll-container::-webkit-scrollbar { display: none; }
+
+    .scroll-area {
+        height: 100vh; width: 100%; scroll-snap-align: start;
+        display: flex; justify-content: center; align-items: center; position: relative;
+    }
+
+    /* --- 3. About Me 置左設定 --- */
+    .content-wrapper { width: 85%; max-width: 1100px; }
+    
+    .center-layout { text-align: center; }
+    
+    .left-layout {
+        text-align: left;
+        display: flex; 
+        flex-direction: column; 
+        align-items: flex-start; /* 確保內容靠左 */
+    }
+    
+    .about-text { 
+        text-align: left; 
+        line-height: 1.8; 
+        font-size: 1.15rem; 
+        width: 100%;
+    }
+    
+    .section-title { font-size: 2.8rem; margin-bottom: 25px; font-weight: 800; }
+
+    /* --- 4. 右側圓點 --- */
+    .side-nav {
+        position: fixed; right: 30px; top: 50%; transform: translateY(-50%);
+        z-index: 999; display: flex; flex-direction: column; gap: 15px;
+    }
+    .nav-dot { width: 12px; height: 12px; border: 2px solid var(--primary); border-radius: 50%; cursor: pointer; opacity: 0.3; transition: 0.3s; }
+    .nav-dot.active { background-color: var(--primary); opacity: 1; transform: scale(1.3); }
+
+    /* --- 5. 動畫設定：初始狀態 --- */
+    .profile-animation-wrapper .profile img,
+    .profile-animation-wrapper .profile h1,
+    .profile-animation-wrapper .profile .profile-meta,
+    .profile-animation-wrapper .profile .social-icons,
+    .profile-animation-wrapper .profile .buttons,
+    .section-title,
+    .post-content-animation-wrapper {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    /* --- 6. 進入視線時的觸發狀態 --- */
+    .visible .profile img { opacity: 1; transform: translateY(0); transition-delay: 0.1s; }
+    .visible .profile h1 { opacity: 1; transform: translateY(0); transition-delay: 0.2s; }
+    .visible .profile .profile-meta { opacity: 1; transform: translateY(0); transition-delay: 0.3s; }
+    
+    /* 強制顯示 Icon 與按鈕 */
+    .visible .social-icons { opacity: 1 !important; transform: translateY(0) !important; transition-delay: 0.5s !important; }
+    .visible .buttons { opacity: 1 !important; transform: translateY(0) !important; transition-delay: 0.6s !important; }
+    
+    /* 第二頁動畫 */
+    .content-slide.visible .section-title { opacity: 1; transform: translateY(0); transition-delay: 0.2s; }
+    .content-slide.visible .post-content-animation-wrapper { opacity: 1; transform: translateY(0); transition-delay: 0.4s; }
+
+    /* 箭頭提示 */
+    .scroll-hint { position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%); }
+    .scroll-hint span { display: block; width: 18px; height: 18px; border-bottom: 2px solid var(--primary); border-right: 2px solid var(--primary); transform: rotate(45deg); margin: -8px; animation: arrow 2s infinite; }
+    @keyframes arrow { 0% { opacity: 0; transform: rotate(45deg) translate(-15px, -15px); } 50% { opacity: 1; } 100% { opacity: 0; transform: rotate(45deg) translate(15px, 15px); } }
+</style>
+
+<script>
+    function scrollToSection(id) { document.getElementById(id).scrollIntoView({ behavior: 'smooth' }); }
+    document.addEventListener('DOMContentLoaded', () => {
+        const sections = document.querySelectorAll('.scroll-area');
+        const dots = document.querySelectorAll('.nav-dot');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    const index = Array.from(sections).indexOf(entry.target);
+                    dots.forEach(dot => dot.classList.remove('active'));
+                    if(dots[index]) dots[index].classList.add('active');
+                } else {
+                    entry.target.classList.remove('visible'); // 滑走時重置動畫
+                }
+            });
+        }, { threshold: 0.5 });
+        sections.forEach(section => observer.observe(section));
+    });
+</script>
+
+{{ end }}
