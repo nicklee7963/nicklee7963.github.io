@@ -6,6 +6,7 @@ languageCode: "en-us"
 enableInlineShortcodes: true
 
 params:
+  math: true
   # 這是你的副標題：結合生機系、AI與拳擊
   description: "NTU BIME | Robotics & AI Engineer | Amateur Boxer"
   defaultTheme: auto
@@ -49,4 +50,24 @@ menu:
       name: Boxing & Fitness
       url: /about/
       weight: 40
-  
+
+# LaTeX 設定
+ markup:
+  goldmark:
+    renderer:
+      unsafe: true
+    extensions:
+      passthrough:
+        enable: true
+        delimiters:
+          block:
+          - - \[
+            - \]
+          - - $$
+            - $$
+          inline:
+          - - \(
+            - \)
+          # 有時候 PaperMod 需要這行來讓單個 $ 符號生效
+          - - $
+            - $ 
