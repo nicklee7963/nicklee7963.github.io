@@ -1,143 +1,216 @@
 {{ define "main" }}
 
-<div class="scroll-container">
+<div class="notes-wrapper">
+    
+    {{ $isRoot := or (eq .RelPermalink "/learning-notes/") (eq .RelPermalink "/notes/") }}
 
-    <section class="scroll-area section-hero" id="hero-section">
-        <div class="content-wrapper center-layout">
-            <h1 class="hero-title">{{ .Title }}</h1>
-            <p class="hero-subtitle">Sharing my thoughts and technical notes.</p>
-            <div class="scroll-hint">
-                <span></span><span></span><span></span>
-            </div>
-        </div>
-    </section>
+    <header class="page-header header-animation">
+        
+        <h1 class="section-title">
+            {{ if $isRoot }}
+                LATEST NOTES
+            {{ else }}
+                {{ .Title | upper }}
+            {{ end }}
+        </h1>
 
-    <section class="scroll-area list-section" id="list-section">
-        <div class="content-wrapper left-layout">
-            <h2 class="section-label">Latest Notes</h2>
-            <div class="notes-grid">
-                {{ range .Pages }}
-                <article class="note-item-animation-wrapper">
-                    <div class="note-card">
-                        <span class="note-meta">{{ .Date.Format "Jan 02, 2006" }}</span>
-                        <h3 class="note-title"><a href="{{ .Permalink }}">{{ .Title }}</a></h3>
-                        <p class="note-summary">{{ .Summary | truncate 200 }}</p>
-                        <a class="read-more" href="{{ .Permalink }}">Explore More →</a>
+        {{ with .Params.reading_link }}
+        <a href="{{ . }}" class="header-btn">
+            {{ $.Params.reading_text | default "View Reading List" }} →
+        </a>
+        {{ end }}
+
+    </header>
+
+    <div class="{{ if $isRoot }}notes-grid{{ else }}notes-list{{ end }}">
+        
+        {{ $colors := slice "#3b82f6" "#8b5cf6" "#10b981" "#f59e0b" "#ec4899" "#06b6d4" }}
+
+        {{ range $index, $element := .Pages.ByWeight }}
+        
+        {{ $delay := mul $index 0.05 }} 
+        {{ if gt $index 10 }}{{ $delay = 0.5 }}{{ end }}
+        {{ $color := index $colors (mod $index (len $colors)) }}
+
+        {{ if $isRoot }}
+            <article class="note-card item-animation-wrapper" style="transition-delay: {{ $delay }}s;">
+                <div class="card-content folder-style">
+                    <div class="accent-line" style="background-color: {{ $color }}; box-shadow: 0 2px 10px {{ $color }}40;"></div>
+                    <div class="title-container">
+                        <h3 class="note-title auto-fit">{{ .Title }}</h3>
                     </div>
-                </article>
-                {{ end }}
-            </div>
-        </div>
-    </section>
+                    <p class="note-summary">Contains {{ len .Pages }} notes.</p>
+                    <a class="read-more-btn" href="{{ .Permalink }}">OPEN FOLDER</a>
+                </div>
+            </article>
 
+        {{ else }}
+            <article class="note-row-item item-animation-wrapper" style="transition-delay: {{ $delay }}s; border-left: 3px solid {{ $color }};">
+                <div class="row-content">
+                    <div class="row-info">
+                        <div class="row-header">
+                            <span class="row-date">{{ .Date.Format "Jan 02, 2006" }}</span>
+                            {{ with .Params.difficulty }}
+                                {{ $tagColor := "#10b981" }} 
+                                {{ if eq . "medium" }}{{ $tagColor = "#f59e0b" }}{{ end }} 
+                                {{ if eq . "hard" }}{{ $tagColor = "#e11d48" }}{{ end }}   
+                                <span class="row-tag" style="color: {{ $tagColor }}; background: {{ $tagColor }}15; border: 1px solid {{ $tagColor }}40;">
+                                    {{ . | upper }}
+                                </span>
+                            {{ end }}
+                        </div>
+                        <h3 class="row-title"><a href="{{ .Permalink }}">{{ .Title }}</a></h3>
+                    </div>
+                    <div class="row-action">
+                        <a href="{{ .Permalink }}" class="row-arrow">→</a>
+                    </div>
+                </div>
+            </article>
+        {{ end }}
+
+        {{ end }}
+    </div>
 </div>
 
 <style>
-    /* --- 1. 破解標題與導覽列的寬度限制 --- */
-    .header {
-        position: fixed !important;
-        top: 0; left: 0;
-        width: 100% !important; /* 強制全頁面寬度 */
-        max-width: none !important;
-        z-index: 1000;
-        background: transparent;
-    }
+    /* =========================================
+       1. 全局設定
+       ========================================= */
+    .header { position: fixed !important; top: 0; left: 0; width: 100vw !important; max-width: none !important; z-index: 1000; background: rgba(var(--theme), 0.8); backdrop-filter: blur(8px); }
+    .nav { display: flex; justify-content: space-between; width: 100% !important; max-width: none !important; padding: 0 40px !important; box-sizing: border-box; }
+    .main { max-width: none !important; padding: 0 !important; margin: 0 !important; width: 100vw; }
+    
+    .notes-wrapper { width: 90%; max-width: 1100px; margin: 120px auto 60px; }
 
-    .nav {
-        max-width: none !important;
-        padding: 0 40px !important; /* 保持邊緣呼吸空間 */
-    }
-
-    .main { max-width: none !important; padding: 0 !important; margin: 0 !important; }
-    html, body { overflow: hidden; height: 100%; width: 100%; }
-
-    /* --- 2. 滾動容器與全螢幕設定 --- */
-    .scroll-container {
-        height: 100vh; width: 100vw;
-        overflow-y: auto;
-        scroll-snap-type: y mandatory;
-        scroll-behavior: smooth;
-        scrollbar-width: none;
-    }
-    .scroll-container::-webkit-scrollbar { display: none; }
-
-    .scroll-area {
-        height: 100vh; width: 100%;
-        scroll-snap-align: start;
-        display: flex; justify-content: center; align-items: center;
-        position: relative;
-    }
-
-    /* --- 3. 寬距統一 (1100px) --- */
-    .content-wrapper { 
-        width: 90%; 
-        max-width: 1100px; 
+    /* =========================================
+       Header 與 按鈕樣式
+       ========================================= */
+    .page-header {
+        margin-bottom: 40px; 
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1); 
+        padding-bottom: 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end; 
     }
     
-    .center-layout { text-align: center; }
-    .left-layout { text-align: left; display: flex; flex-direction: column; align-items: flex-start; }
-
-    /* --- 4. 樣式設計 --- */
-    .hero-title { font-size: 6rem; font-weight: 900; margin-bottom: 10px; }
-    .hero-subtitle { font-size: 1.5rem; opacity: 0.7; }
-    
-    .section-label { font-size: 1rem; text-transform: uppercase; letter-spacing: 2px; color: var(--primary); margin-bottom: 40px; }
-
-    .notes-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-        gap: 30px;
-        width: 100%;
+    h1.section-title {
+        font-size: 0.95rem !important; 
+        font-weight: 700 !important;
+        text-transform: uppercase;
+        letter-spacing: 4px !important; 
+        color: #e5e5e5; 
+        margin: 0; 
+        padding-left: 2px;
+        line-height: 1.5;
     }
+
+    .header-btn {
+        font-size: 0.75rem;
+        font-weight: 600;
+        color: rgba(255, 255, 255, 0.7);
+        text-decoration: none;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        padding: 6px 14px;
+        border-radius: 20px;
+        transition: all 0.2s ease;
+        letter-spacing: 0.5px;
+        white-space: nowrap; 
+    }
+
+    .header-btn:hover {
+        color: #fff;
+        border-color: var(--primary);
+        background: rgba(var(--primary-rgb), 0.1);
+        transform: translateY(-2px);
+    }
+
+    /* =========================================
+       2. Grid View
+       ========================================= */
+    .notes-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; width: 100%; }
+    @media (max-width: 900px) { .notes-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 600px) { .notes-grid { grid-template-columns: 1fr; } }
 
     .note-card {
-        padding: 25px;
-        background: var(--entry);
-        border: 1px solid var(--border);
-        border-radius: 12px;
-        transition: 0.3s;
+        background: var(--entry); border: 1px solid var(--border); border-radius: 12px;
+        padding: 24px; height: 240px; display: flex; flex-direction: column;
+        transition: transform 0.3s ease, border-color 0.3s ease;
     }
     .note-card:hover { transform: translateY(-5px); border-color: var(--primary); }
-    .note-title { font-size: 1.5rem; margin: 10px 0; }
-    .note-meta { font-family: monospace; font-size: 0.9rem; opacity: 0.6; }
-    .note-summary { font-size: 0.95rem; line-height: 1.6; opacity: 0.8; margin-bottom: 20px; }
-    .read-more { color: var(--primary); font-weight: bold; text-decoration: none; font-size: 0.9rem; }
+    
+    .card-content { height: 100%; display: flex; flex-direction: column; justify-content: space-between; }
+    .accent-line { width: 40px; height: 4px; border-radius: 2px; margin-bottom: 15px; opacity: 0.9; }
+    .title-container { height: 80px; display: flex; align-items: center; overflow: hidden; margin-bottom: 10px; }
+    .note-title { font-size: 1.6rem; font-weight: 700; line-height: 1.2; margin: 0; width: 100%; word-wrap: break-word; }
+    .note-summary { font-size: 0.95rem; line-height: 1.5; opacity: 0.8; flex-grow: 1; overflow: hidden; margin-bottom: 10px; }
+    .read-more-btn { align-self: flex-start; font-size: 0.8rem; font-weight: 700; color: #fff; text-transform: uppercase; letter-spacing: 1px; text-decoration: none; margin-top: auto; opacity: 0.8; transition: opacity 0.2s; }
+    .read-more-btn:hover { opacity: 1; }
 
-    /* --- 5. 浮現動畫 (每次滾動觸發) --- */
-    .hero-title, .hero-subtitle, .note-item-animation-wrapper, .section-label {
-        opacity: 0;
-        transform: translateY(40px);
-        transition: all 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+    /* =========================================
+       3. List View
+       ========================================= */
+    .notes-list { display: flex; flex-direction: column; gap: 15px; width: 100%; }
+
+    .note-row-item {
+        background: var(--entry); border: 1px solid var(--border); border-radius: 8px;
+        padding: 25px 30px; transition: transform 0.2s ease, background 0.2s ease;
+    }
+    .note-row-item:hover { transform: translateX(5px); background: rgba(255, 255, 255, 0.03); }
+
+    .row-content { display: flex; justify-content: space-between; align-items: center; }
+    .row-info { flex-grow: 1; padding-right: 20px; }
+    
+    .row-header { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
+    .row-date { font-family: monospace; font-size: 0.85rem; opacity: 0.5; }
+    
+    .row-tag { 
+        font-size: 0.7rem; font-weight: 800; padding: 2px 8px; 
+        border-radius: 4px; letter-spacing: 0.5px;
     }
 
-    .visible .hero-title { opacity: 1; transform: translateY(0); transition-delay: 0.1s; }
-    .visible .hero-subtitle { opacity: 1; transform: translateY(0); transition-delay: 0.3s; }
-    .visible .section-label { opacity: 1; transform: translateY(0); transition-delay: 0.1s; }
+    .row-title { font-size: 1.4rem; margin: 0; font-weight: 700; }
+    .row-title a { text-decoration: none; color: inherit; }
     
-    /* 筆記清單依序彈出 */
-    .visible .note-item-animation-wrapper:nth-child(1) { opacity: 1; transform: translateY(0); transition-delay: 0.2s; }
-    .visible .note-item-animation-wrapper:nth-child(2) { opacity: 1; transform: translateY(0); transition-delay: 0.3s; }
-    .visible .note-item-animation-wrapper:nth-child(3) { opacity: 1; transform: translateY(0); transition-delay: 0.4s; }
+    .row-action { display: flex; align-items: center; }
+    .row-arrow { font-size: 1.5rem; color: var(--secondary); text-decoration: none; transition: color 0.2s, transform 0.2s; }
+    .note-row-item:hover .row-arrow { color: var(--primary); transform: translateX(5px); }
 
-    /* 箭頭提示 */
-    .scroll-hint { position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%); }
-    .scroll-hint span { display: block; width: 18px; height: 18px; border-bottom: 2px solid var(--primary); border-right: 2px solid var(--primary); transform: rotate(45deg); margin: -8px; animation: arrow 2s infinite; }
-    @keyframes arrow { 0% { opacity: 0; transform: rotate(45deg) translate(-15px, -15px); } 50% { opacity: 1; } 100% { opacity: 0; transform: rotate(45deg) translate(15px, 15px); } }
+    @media (max-width: 600px) {
+        .row-content { flex-direction: column; align-items: flex-start; }
+        .row-action { display: none; }
+        .page-header { flex-direction: column; align-items: flex-start; gap: 10px; } 
+        .header-btn { align-self: flex-start; margin-top: 5px; }
+    }
+
+    /* =========================================
+       4. 動畫
+       ========================================= */
+    .header-animation, .item-animation-wrapper { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1); }
+    .visible { opacity: 1 !important; transform: translateY(0) !important; }
+
 </style>
 
 <script>
     document.addEventListener('DOMContentLoaded', () => {
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                } else {
-                    entry.target.classList.remove('visible'); // 離開時移除，實現重複觸發
-                }
+                if (entry.isIntersecting) entry.target.classList.add('visible');
             });
-        }, { threshold: 0.3 });
+        }, { threshold: 0.1 });
 
-        document.querySelectorAll('.scroll-area').forEach(section => observer.observe(section));
+        observer.observe(document.querySelector('.header-animation'));
+        document.querySelectorAll('.item-animation-wrapper').forEach(item => observer.observe(item));
+
+        const titles = document.querySelectorAll('.auto-fit');
+        titles.forEach(title => {
+            let fontSize = 1.6; 
+            title.style.fontSize = fontSize + 'rem';
+            while (title.scrollHeight > 75 && fontSize > 0.8) {
+                fontSize -= 0.1;
+                title.style.fontSize = fontSize + 'rem';
+            }
+        });
     });
 </script>
 

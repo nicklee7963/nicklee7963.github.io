@@ -6,8 +6,15 @@
     <description>Recent content in About Me on Lee, Li-Hsiang</description>
     <generator>Hugo -- 0.146.0</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 21 Jan 2026 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 22 Jan 2026 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>1-1 Vectors and Linear Combinations</title>
+      <link>http://localhost:1313/notes/math/introduction_to_linear_algebra/chapter01_vectors_and_matrices/1-1_vectors_and_linear_combinations/</link>
+      <pubDate>Thu, 22 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/notes/math/introduction_to_linear_algebra/chapter01_vectors_and_matrices/1-1_vectors_and_linear_combinations/</guid>
+      <description>&lt;p&gt;你好&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Smart Spraying UGV</title>
       <link>http://localhost:1313/projects/smart-spraying-ugv/</link>
@@ -21,13 +28,6 @@
       <pubDate>Wed, 21 Jan 2026 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/reading/introduction-to-linear-algebra/</guid>
       <description>Gilbert Strang 的經典教材，深入淺出的矩陣世界。</description>
-    </item>
-    <item>
-      <title>Understanding SVD (Singular Value Decomposition)</title>
-      <link>http://localhost:1313/notes/linear-algebra-svd/</link>
-      <pubDate>Wed, 21 Jan 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/notes/linear-algebra-svd/</guid>
-      <description>My notes on SVD and its application in image compression.</description>
     </item>
     <item>
       <title></title>

@@ -15,12 +15,5 @@
       <guid>http://localhost:1313/reading/introduction-to-linear-algebra/</guid>
       <description>Gilbert Strang 的經典教材，深入淺出的矩陣世界。</description>
     </item>
-    <item>
-      <title>Understanding SVD (Singular Value Decomposition)</title>
-      <link>http://localhost:1313/notes/linear-algebra-svd/</link>
-      <pubDate>Wed, 21 Jan 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/notes/linear-algebra-svd/</guid>
-      <description>My notes on SVD and its application in image compression.</description>
-    </item>
   </channel>
 </rss>
