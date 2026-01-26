@@ -13,10 +13,82 @@
       <link>http://localhost:1313/notes/math/introduction_to_linear_algebra/chapter01_vectors_and_matrices/1-1_vectors_and_linear_combinations/</link>
       <pubDate>Thu, 22 Jan 2026 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/notes/math/introduction_to_linear_algebra/chapter01_vectors_and_matrices/1-1_vectors_and_linear_combinations/</guid>
-      <description>&lt;h1 id=&#34;11-vectors-and-linear-combinatioss&#34;&gt;1.1 Vectors and Linear Combinatioss&lt;/h1&gt;
-&lt;h2 id=&#34;linear-combinations&#34;&gt;Linear Combinations&lt;/h2&gt;
+      <description>&lt;h3 id=&#34;linear-combinations&#34;&gt;Linear Combinations&lt;/h3&gt;
 &lt;p&gt;If $w$ and $v$ are non-collinear, the linear combinations $c\vec{v} + d\vec{w}$ &lt;strong&gt;fill the plane&lt;/strong&gt;.&lt;/p&gt;
-&lt;h2&gt;&lt;/h2&gt;</description>
+&lt;h3 id=&#34;solving-two-equations&#34;&gt;Solving Two Equations&lt;/h3&gt;
+&lt;p&gt;If $\vec{v}$, $\vec{w}$ are not on the same line. They are &lt;strong&gt;linearly independent&lt;/strong&gt;.&lt;/p&gt;
+&lt;h3 id=&#34;can-elimination-fail&#34;&gt;Can Elimination Fail?&lt;/h3&gt;
+&lt;p&gt;If $\vec{v}$ and $\vec{w}$ lie on the same line. They are &lt;strong&gt;linearly dependent&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;$$
+\mathbf{v} = \begin{bmatrix}
+2 \
+3 \
+1
+\end{bmatrix}, \quad
+\mathbf{w} = \begin{bmatrix}
+1 \
+1 \
+0
+\end{bmatrix}
+$$&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>1-2 Lengths and Angles from Dot Products</title>
+      <link>http://localhost:1313/notes/math/introduction_to_linear_algebra/chapter01_vectors_and_matrices/1-2_lengths_and_angles_from_dot_products/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/notes/math/introduction_to_linear_algebra/chapter01_vectors_and_matrices/1-2_lengths_and_angles_from_dot_products/</guid>
+      <description>&lt;p&gt;The dot product of
+$
+\vec{v} = \begin{bmatrix}
+v_1 \
+v_2
+\end{bmatrix}
+$
+and
+$
+\vec{w} = \begin{bmatrix}
+w_1 \
+w_2
+\end{bmatrix}
+$
+is $\vec{v} \cdot \vec{w} = v_1w_1 + v_2w_2$&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;The dot product $\vec{v} \cdot \vec{v}$ tell us the squared length $|v|^2$ of a vector.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;We use the words &lt;strong&gt;unit vector&lt;/strong&gt; when the length of the vector is 1. Divide $\vec{v}$ by $|\vec{v}|$.&lt;/p&gt;
+&lt;h3 id=&#34;perpendicular-vectors&#34;&gt;Perpendicular Vectors&lt;/h3&gt;
+&lt;p&gt;Prependicular vectors have $\vec{v} \cdot \vec{w} = 0$. Then $(|\vec{v}| + |\vec{w}|)^2 = |\vec{v}|^2 + |\vec{w}|^2$.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>1-3 Matrices and Their Column Spaces</title>
+      <link>http://localhost:1313/notes/math/introduction_to_linear_algebra/chapter01_vectors_and_matrices/1-3_matrices_and_their_column_spaces/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/notes/math/introduction_to_linear_algebra/chapter01_vectors_and_matrices/1-3_matrices_and_their_column_spaces/</guid>
+      <description>&lt;p&gt;$
+A = \begin{bmatrix}
+1 &amp;amp; 2 \
+3 &amp;amp; 4 \
+5 &amp;amp; 6
+\end{bmatrix}
+$
+is a &lt;strong&gt;3 by 2 matrix&lt;/strong&gt; (3 rows 2 columns)&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The &lt;strong&gt;row picture&lt;/strong&gt; of Ax will come from &lt;strong&gt;dot products&lt;/strong&gt; of x with rows of A.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;$A\mathbf{x} = \begin{bmatrix}
+-1 &amp;amp; 1 &amp;amp; 0 &amp;amp; 0 \
+0 &amp;amp; -1 &amp;amp; 1 &amp;amp; 0 \
+0 &amp;amp; 0 &amp;amp; -1 &amp;amp; 1
+\end{bmatrix}
+\begin{bmatrix}
+x1 \
+x2 \
+x3 \
+x4
+\end{bmatrix}
+=\begin{bmatrix}
+row 1 \cdot \mathbf{x} \
+row 2 \cdot \mathbf{x} \
+row 3 \cdot \mathbf{x}
+\end{bmatrix}$&lt;/p&gt;</description>
     </item>
     <item>
       <title>Smart Spraying UGV</title>

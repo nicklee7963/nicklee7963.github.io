@@ -8,8 +8,8 @@ weight: 2
 
 $
 A = \begin{bmatrix}
-1 & 2 \\
-3 & 4 \\
+1 & 2 \\\\
+3 & 4 \\\\
 5 & 6 
 \end{bmatrix}
 $
@@ -19,41 +19,41 @@ is a **3 by 2 matrix** (3 rows 2 columns)
 - The **row picture** of Ax will come from **dot products** of x with rows of A.
 
 $A\mathbf{x} = \begin{bmatrix} 
--1 & 1 & 0 & 0 \\
-0 & -1 & 1 & 0 \\
+-1 & 1 & 0 & 0 \\\\
+0 & -1 & 1 & 0 \\\\
 0 & 0 & -1 & 1
 \end{bmatrix}
 \begin{bmatrix}
-x1 \\ 
-x2 \\
-x3 \\
+x1 \\\\
+x2 \\\\
+x3 \\\\
 x4
 \end{bmatrix}
 =\begin{bmatrix} 
-row 1 \cdot \mathbf{x} \\
-row 2 \cdot \mathbf{x} \\
+row 1 \cdot \mathbf{x} \\\\
+row 2 \cdot \mathbf{x} \\\\
 row 3 \cdot \mathbf{x}
 \end{bmatrix}$
 
 - The **column picture** will come from **linear combinations** of the columns of A.
 
 $A\mathbf{x} = x_1\begin{bmatrix}
--1 \\
-0 \\
+-1 \\\\
+0 \\\\
 0\end{bmatrix}
 +x_2\begin{bmatrix}
-1 \\
--1 \\
+1 \\\\
+-1 \\\\
 0
 \end{bmatrix}
 +x_3\begin{bmatrix}
-0 \\
-1 \\
+0 \\\\
+1 \\\\
 -1 
 \end{bmatrix}
 +x_4\begin{bmatrix}
-0 \\
-0 \\
+0 \\\\
+0 \\\\
 1
 \end{bmatrix}
 $
@@ -61,8 +61,8 @@ $
 ##### Indpendent columns
 $$ 
 A_1 = \begin{bmatrix}
-1 & 0 & 0 \\
-2 & 4 & 0 \\
+1 & 0 & 0 \\\\
+2 & 4 & 0 \\\\
 3 & 5 & 6
 \end{bmatrix}
 $$
@@ -71,8 +71,8 @@ $$
 ##### Dependent columns
 $$ 
 A_1 = \begin{bmatrix}
-1 & 2 & 3 \\
-1 & 4 & 5 \\
+1 & 2 & 3 \\\\
+1 & 4 & 5 \\\\
 6 & 0 & 6
 \end{bmatrix}
 $$

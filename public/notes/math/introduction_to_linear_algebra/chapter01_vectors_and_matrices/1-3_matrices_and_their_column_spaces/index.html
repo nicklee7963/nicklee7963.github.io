@@ -5,28 +5,37 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
-<title>1-1 Vectors and Linear Combinations | Lee, Li-Hsiang</title>
+<title>1-3 Matrices and Their Column Spaces | Lee, Li-Hsiang</title>
 <meta name="keywords" content="">
-<meta name="description" content="Linear Combinations
-If $w$ and $v$ are non-collinear, the linear combinations $c\vec{v} &#43; d\vec{w}$ fill the plane.
-Solving Two Equations
-If $\vec{v}$, $\vec{w}$ are not on the same line. They are linearly independent.
-Can Elimination Fail?
-If $\vec{v}$ and $\vec{w}$ lie on the same line. They are linearly dependent.
-$$
-\mathbf{v} = \begin{bmatrix}
-2 \
-3 \
-1
-\end{bmatrix}, \quad
-\mathbf{w} = \begin{bmatrix}
-1 \
-1 \
-0
+<meta name="description" content="$
+A = \begin{bmatrix}
+1 &amp; 2 \
+3 &amp; 4 \
+5 &amp; 6
 \end{bmatrix}
-$$">
+$
+is a 3 by 2 matrix (3 rows 2 columns)
+
+The row picture of Ax will come from dot products of x with rows of A.
+
+$A\mathbf{x} = \begin{bmatrix}
+-1 &amp; 1 &amp; 0 &amp; 0 \
+0 &amp; -1 &amp; 1 &amp; 0 \
+0 &amp; 0 &amp; -1 &amp; 1
+\end{bmatrix}
+\begin{bmatrix}
+x1 \
+x2 \
+x3 \
+x4
+\end{bmatrix}
+=\begin{bmatrix}
+row 1 \cdot \mathbf{x} \
+row 2 \cdot \mathbf{x} \
+row 3 \cdot \mathbf{x}
+\end{bmatrix}$">
 <meta name="author" content="">
-<link rel="canonical" href="http://localhost:1313/notes/math/introduction_to_linear_algebra/chapter01_vectors_and_matrices/1-1_vectors_and_linear_combinations/">
+<link rel="canonical" href="http://localhost:1313/notes/math/introduction_to_linear_algebra/chapter01_vectors_and_matrices/1-3_matrices_and_their_column_spaces/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.da3211e5ef867bf2b75fd5a6515cfed7195c011e8ab735694e203810a827097b.css" integrity="sha256-2jIR5e&#43;Ge/K3X9WmUVz&#43;1xlcAR6KtzVpTiA4EKgnCXs=" rel="preload stylesheet" as="style">
 <link rel="icon" href="http://localhost:1313/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
@@ -35,7 +44,7 @@ $$">
 <link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" hreflang="en" href="http://localhost:1313/notes/math/introduction_to_linear_algebra/chapter01_vectors_and_matrices/1-1_vectors_and_linear_combinations/">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/notes/math/introduction_to_linear_algebra/chapter01_vectors_and_matrices/1-3_matrices_and_their_column_spaces/">
 <noscript>
     <style>
         #theme-toggle,
@@ -87,38 +96,43 @@ $$">
         document.querySelector("html").dataset.theme = 'light';
     }
 
-</script><meta property="og:url" content="http://localhost:1313/notes/math/introduction_to_linear_algebra/chapter01_vectors_and_matrices/1-1_vectors_and_linear_combinations/">
+</script><meta property="og:url" content="http://localhost:1313/notes/math/introduction_to_linear_algebra/chapter01_vectors_and_matrices/1-3_matrices_and_their_column_spaces/">
   <meta property="og:site_name" content="Lee, Li-Hsiang">
-  <meta property="og:title" content="1-1 Vectors and Linear Combinations">
-  <meta property="og:description" content="Linear Combinations If $w$ and $v$ are non-collinear, the linear combinations $c\vec{v} &#43; d\vec{w}$ fill the plane.
-Solving Two Equations If $\vec{v}$, $\vec{w}$ are not on the same line. They are linearly independent.
-Can Elimination Fail? If $\vec{v}$ and $\vec{w}$ lie on the same line. They are linearly dependent.
-$$ \mathbf{v} = \begin{bmatrix} 2 \ 3 \ 1 \end{bmatrix}, \quad \mathbf{w} = \begin{bmatrix} 1 \ 1 \ 0 \end{bmatrix} $$">
+  <meta property="og:title" content="1-3 Matrices and Their Column Spaces">
+  <meta property="og:description" content="$ A = \begin{bmatrix} 1 &amp; 2 \ 3 &amp; 4 \ 5 &amp; 6 \end{bmatrix} $ is a 3 by 2 matrix (3 rows 2 columns)
+The row picture of Ax will come from dot products of x with rows of A. $A\mathbf{x} = \begin{bmatrix} -1 &amp; 1 &amp; 0 &amp; 0 \ 0 &amp; -1 &amp; 1 &amp; 0 \ 0 &amp; 0 &amp; -1 &amp; 1 \end{bmatrix} \begin{bmatrix} x1 \ x2 \ x3 \ x4 \end{bmatrix} =\begin{bmatrix} row 1 \cdot \mathbf{x} \ row 2 \cdot \mathbf{x} \ row 3 \cdot \mathbf{x} \end{bmatrix}$">
   <meta property="og:locale" content="en-us">
   <meta property="og:type" content="article">
     <meta property="article:section" content="notes">
-    <meta property="article:published_time" content="2026-01-22T00:00:00+00:00">
-    <meta property="article:modified_time" content="2026-01-22T00:00:00+00:00">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="1-1 Vectors and Linear Combinations">
-<meta name="twitter:description" content="Linear Combinations
-If $w$ and $v$ are non-collinear, the linear combinations $c\vec{v} &#43; d\vec{w}$ fill the plane.
-Solving Two Equations
-If $\vec{v}$, $\vec{w}$ are not on the same line. They are linearly independent.
-Can Elimination Fail?
-If $\vec{v}$ and $\vec{w}$ lie on the same line. They are linearly dependent.
-$$
-\mathbf{v} = \begin{bmatrix}
-2 \
-3 \
-1
-\end{bmatrix}, \quad
-\mathbf{w} = \begin{bmatrix}
-1 \
-1 \
-0
+<meta name="twitter:title" content="1-3 Matrices and Their Column Spaces">
+<meta name="twitter:description" content="$
+A = \begin{bmatrix}
+1 &amp; 2 \
+3 &amp; 4 \
+5 &amp; 6
 \end{bmatrix}
-$$">
+$
+is a 3 by 2 matrix (3 rows 2 columns)
+
+The row picture of Ax will come from dot products of x with rows of A.
+
+$A\mathbf{x} = \begin{bmatrix}
+-1 &amp; 1 &amp; 0 &amp; 0 \
+0 &amp; -1 &amp; 1 &amp; 0 \
+0 &amp; 0 &amp; -1 &amp; 1
+\end{bmatrix}
+\begin{bmatrix}
+x1 \
+x2 \
+x3 \
+x4
+\end{bmatrix}
+=\begin{bmatrix}
+row 1 \cdot \mathbf{x} \
+row 2 \cdot \mathbf{x} \
+row 3 \cdot \mathbf{x}
+\end{bmatrix}$">
 
 
 <script type="application/ld+json">
@@ -153,8 +167,8 @@ $$">
     {
       "@type": "ListItem",
       "position":  5 ,
-      "name": "1-1 Vectors and Linear Combinations",
-      "item": "http://localhost:1313/notes/math/introduction_to_linear_algebra/chapter01_vectors_and_matrices/1-1_vectors_and_linear_combinations/"
+      "name": "1-3 Matrices and Their Column Spaces",
+      "item": "http://localhost:1313/notes/math/introduction_to_linear_algebra/chapter01_vectors_and_matrices/1-3_matrices_and_their_column_spaces/"
     }
   ]
 }
@@ -163,20 +177,20 @@ $$">
 {
   "@context": "https://schema.org",
   "@type": "BlogPosting",
-  "headline": "1-1 Vectors and Linear Combinations",
-  "name": "1-1 Vectors and Linear Combinations",
-  "description": "Linear Combinations If $w$ and $v$ are non-collinear, the linear combinations $c\\vec{v} + d\\vec{w}$ fill the plane.\nSolving Two Equations If $\\vec{v}$, $\\vec{w}$ are not on the same line. They are linearly independent.\nCan Elimination Fail? If $\\vec{v}$ and $\\vec{w}$ lie on the same line. They are linearly dependent.\n$$ \\mathbf{v} = \\begin{bmatrix} 2 \\ 3 \\ 1 \\end{bmatrix}, \\quad \\mathbf{w} = \\begin{bmatrix} 1 \\ 1 \\ 0 \\end{bmatrix} $$\n",
+  "headline": "1-3 Matrices and Their Column Spaces",
+  "name": "1-3 Matrices and Their Column Spaces",
+  "description": "$ A = \\begin{bmatrix} 1 \u0026amp; 2 \\ 3 \u0026amp; 4 \\ 5 \u0026amp; 6 \\end{bmatrix} $ is a 3 by 2 matrix (3 rows 2 columns)\nThe row picture of Ax will come from dot products of x with rows of A. $A\\mathbf{x} = \\begin{bmatrix} -1 \u0026amp; 1 \u0026amp; 0 \u0026amp; 0 \\ 0 \u0026amp; -1 \u0026amp; 1 \u0026amp; 0 \\ 0 \u0026amp; 0 \u0026amp; -1 \u0026amp; 1 \\end{bmatrix} \\begin{bmatrix} x1 \\ x2 \\ x3 \\ x4 \\end{bmatrix} =\\begin{bmatrix} row 1 \\cdot \\mathbf{x} \\ row 2 \\cdot \\mathbf{x} \\ row 3 \\cdot \\mathbf{x} \\end{bmatrix}$\n",
   "keywords": [
     
   ],
-  "articleBody": "Linear Combinations If $w$ and $v$ are non-collinear, the linear combinations $c\\vec{v} + d\\vec{w}$ fill the plane.\nSolving Two Equations If $\\vec{v}$, $\\vec{w}$ are not on the same line. They are linearly independent.\nCan Elimination Fail? If $\\vec{v}$ and $\\vec{w}$ lie on the same line. They are linearly dependent.\n$$ \\mathbf{v} = \\begin{bmatrix} 2 \\ 3 \\ 1 \\end{bmatrix}, \\quad \\mathbf{w} = \\begin{bmatrix} 1 \\ 1 \\ 0 \\end{bmatrix} $$\nThe combinations of $\\mathbf{v}, \\mathbf{w}$ only fill a plane in 3D space\nidintity Matrix $I$: matrix analog of the number 1, becase $I\\mathbf{v} = \\mathbf{v}$ How Do We Know It Is a Plane? Consider $\\vec{u}, \\vec{v}, \\vec{w}$ if $\\vec{w} = c\\vec{u} + d\\vec{v}$ then they are a plane.\nConsider $\\vec{u}, \\vec{v}, \\vec{w}$ if $\\vec{w} \\neq c\\vec{u} + d\\vec{v}$ then they are a 3D space.\nChallenge Problems How many corners $(\\pm1, \\pm1, \\pm1, \\pm1)$ does a cube of side 2 have in 4 dimensions? What is its volume? How many 3D faces? How many edges? Find one edge. $\\mathbf{2 \\times 2 \\times 2 \\times 2}$ $\\mathbf{2 \\times 2 \\times 2 \\times 2}$ 3D faces have three freedom dimensions. There are $\\mathbf{2 \\times 4}$ Lines have one freedom dimension. There are $\\mathbf{8 \\times 4}$ e.g. $\\mathbf{(-1, 1, 1, 1) \\ to \\ (1, 1, 1, 1)}$ ",
-  "wordCount" : "214",
+  "articleBody": "$ A = \\begin{bmatrix} 1 \u0026 2 \\ 3 \u0026 4 \\ 5 \u0026 6 \\end{bmatrix} $ is a 3 by 2 matrix (3 rows 2 columns)\nThe row picture of Ax will come from dot products of x with rows of A. $A\\mathbf{x} = \\begin{bmatrix} -1 \u0026 1 \u0026 0 \u0026 0 \\ 0 \u0026 -1 \u0026 1 \u0026 0 \\ 0 \u0026 0 \u0026 -1 \u0026 1 \\end{bmatrix} \\begin{bmatrix} x1 \\ x2 \\ x3 \\ x4 \\end{bmatrix} =\\begin{bmatrix} row 1 \\cdot \\mathbf{x} \\ row 2 \\cdot \\mathbf{x} \\ row 3 \\cdot \\mathbf{x} \\end{bmatrix}$\nThe column picture will come from linear combinations of the columns of A. $A\\mathbf{x} = x_1\\begin{bmatrix} -1 \\ 0 \\ 0\\end{bmatrix} +x_2\\begin{bmatrix} 1 \\ -1 \\ 0 \\end{bmatrix} +x_3\\begin{bmatrix} 0 \\ 1 \\ -1 \\end{bmatrix} +x_4\\begin{bmatrix} 0 \\ 0 \\ 1 \\end{bmatrix} $\nIndpendent columns $$ A_1 = \\begin{bmatrix} 1 \u0026 0 \u0026 0 \\ 2 \u0026 4 \u0026 0 \\ 3 \u0026 5 \u0026 6 \\end{bmatrix} $$ Each column gives a new direction. Their combinations fill 3D space $R^3$\nDependent columns $$ A_1 = \\begin{bmatrix} 1 \u0026 2 \u0026 3 \\ 1 \u0026 4 \u0026 5 \\ 6 \u0026 0 \u0026 6 \\end{bmatrix} $$ Column 1 + Column 2 = Column3. Their combinations don’t fill 3D space\nColumn space: All combinations of the columns.\nThinking About the Column Space of $A$ Span: describes all the linear combinations of a set of vectors.\nRank: the number of independent columns in A Basis: The first $\\gamma$ independent columns ",
+  "wordCount" : "252",
   "inLanguage": "en",
-  "datePublished": "2026-01-22T00:00:00Z",
-  "dateModified": "2026-01-22T00:00:00Z",
+  "datePublished": "0001-01-01T00:00:00Z",
+  "dateModified": "0001-01-01T00:00:00Z",
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "http://localhost:1313/notes/math/introduction_to_linear_algebra/chapter01_vectors_and_matrices/1-1_vectors_and_linear_combinations/"
+    "@id": "http://localhost:1313/notes/math/introduction_to_linear_algebra/chapter01_vectors_and_matrices/1-3_matrices_and_their_column_spaces/"
   },
   "publisher": {
     "@type": "Organization",
@@ -258,48 +272,86 @@ $$">
   <header class="post-header">
     
     <h1 class="post-title entry-hint-parent">
-      1-1 Vectors and Linear Combinations
+      1-3 Matrices and Their Column Spaces
     </h1>
-    <div class="post-meta"><span title='2026-01-22 00:00:00 +0000 UTC'>January 22, 2026</span>
+    <div class="post-meta">
 
 </div>
   </header> 
-  <div class="post-content"><h3 id="linear-combinations">Linear Combinations<a hidden class="anchor" aria-hidden="true" href="#linear-combinations">#</a></h3>
-<p>If $w$ and $v$ are non-collinear, the linear combinations $c\vec{v} + d\vec{w}$ <strong>fill the plane</strong>.</p>
-<h3 id="solving-two-equations">Solving Two Equations<a hidden class="anchor" aria-hidden="true" href="#solving-two-equations">#</a></h3>
-<p>If $\vec{v}$, $\vec{w}$ are not on the same line. They are <strong>linearly independent</strong>.</p>
-<h3 id="can-elimination-fail">Can Elimination Fail?<a hidden class="anchor" aria-hidden="true" href="#can-elimination-fail">#</a></h3>
-<p>If $\vec{v}$ and $\vec{w}$ lie on the same line. They are <strong>linearly dependent</strong>.</p>
-<p>$$
-\mathbf{v} = \begin{bmatrix}
-2 \
-3 \
-1
-\end{bmatrix}, \quad
-\mathbf{w} = \begin{bmatrix}
+  <div class="post-content"><p>$
+A = \begin{bmatrix}
+1 &amp; 2 \
+3 &amp; 4 \
+5 &amp; 6
+\end{bmatrix}
+$
+is a <strong>3 by 2 matrix</strong> (3 rows 2 columns)</p>
+<ul>
+<li>The <strong>row picture</strong> of Ax will come from <strong>dot products</strong> of x with rows of A.</li>
+</ul>
+<p>$A\mathbf{x} = \begin{bmatrix}
+-1 &amp; 1 &amp; 0 &amp; 0 \
+0 &amp; -1 &amp; 1 &amp; 0 \
+0 &amp; 0 &amp; -1 &amp; 1
+\end{bmatrix}
+\begin{bmatrix}
+x1 \
+x2 \
+x3 \
+x4
+\end{bmatrix}
+=\begin{bmatrix}
+row 1 \cdot \mathbf{x} \
+row 2 \cdot \mathbf{x} \
+row 3 \cdot \mathbf{x}
+\end{bmatrix}$</p>
+<ul>
+<li>The <strong>column picture</strong> will come from <strong>linear combinations</strong> of the columns of A.</li>
+</ul>
+<p>$A\mathbf{x} = x_1\begin{bmatrix}
+-1 \
+0 \
+0\end{bmatrix}
++x_2\begin{bmatrix}
 1 \
-1 \
+-1 \
 0
 \end{bmatrix}
-$$</p>
-<p>The combinations of $\mathbf{v}, \mathbf{w}$ <strong>only fill a plane in 3D space</strong></p>
-<ul>
-<li><strong>idintity Matrix $I$</strong>: matrix analog of the number 1, becase $I\mathbf{v} = \mathbf{v}$</li>
-</ul>
-<h3 id="how-do-we-know-it-is-a-plane">How Do We Know It Is a Plane?<a hidden class="anchor" aria-hidden="true" href="#how-do-we-know-it-is-a-plane">#</a></h3>
-<p>Consider $\vec{u}, \vec{v}, \vec{w}$ if $\vec{w} = c\vec{u} + d\vec{v}$ then they are <strong>a plane</strong>.</p>
-<p>Consider $\vec{u}, \vec{v}, \vec{w}$ if $\vec{w} \neq c\vec{u} + d\vec{v}$ then they are <strong>a 3D space</strong>.</p>
-<h3 id="challenge-problems">Challenge Problems<a hidden class="anchor" aria-hidden="true" href="#challenge-problems">#</a></h3>
-<ol start="24">
-<li>How many corners $(\pm1, \pm1, \pm1, \pm1)$ does a cube of side 2 have in 4 dimensions? What is its volume? How many 3D faces? How many edges? Find one edge.
++x_3\begin{bmatrix}
+0 \
+1 \
+-1
+\end{bmatrix}
++x_4\begin{bmatrix}
+0 \
+0 \
+1
+\end{bmatrix}
+$</p>
+<h5 id="indpendent-columns">Indpendent columns<a hidden class="anchor" aria-hidden="true" href="#indpendent-columns">#</a></h5>
+<p>$$
+A_1 = \begin{bmatrix}
+1 &amp; 0 &amp; 0 \
+2 &amp; 4 &amp; 0 \
+3 &amp; 5 &amp; 6
+\end{bmatrix}
+$$
+<em>Each column gives a new direction.</em> Their combinations fill 3D space $R^3$</p>
+<h5 id="dependent-columns">Dependent columns<a hidden class="anchor" aria-hidden="true" href="#dependent-columns">#</a></h5>
+<p>$$
+A_1 = \begin{bmatrix}
+1 &amp; 2 &amp; 3 \
+1 &amp; 4 &amp; 5 \
+6 &amp; 0 &amp; 6
+\end{bmatrix}
+$$
+<strong>Column 1 + Column 2 = Column3. Their combinations don&rsquo;t fill 3D space</strong></p>
+<p><strong>Column space: All combinations of the columns.</strong></p>
+<h3 id="thinking-about-the-column-space-of-a">Thinking About the Column Space of $A$<a hidden class="anchor" aria-hidden="true" href="#thinking-about-the-column-space-of-a">#</a></h3>
+<p><strong>Span</strong>: describes all the linear combinations of a set of vectors.</p>
 <ol>
-<li>$\mathbf{2 \times 2 \times 2 \times 2}$</li>
-<li>$\mathbf{2 \times 2 \times 2 \times 2}$</li>
-<li>3D faces have three freedom dimensions. There are $\mathbf{2 \times 4}$</li>
-<li>Lines have one freedom dimension. There are $\mathbf{8 \times 4}$</li>
-<li>e.g. $\mathbf{(-1, 1, 1, 1) \  to \ (1, 1, 1, 1)}$</li>
-</ol>
-</li>
+<li><strong>Rank</strong>: the number of independent columns in A</li>
+<li><strong>Basis</strong>: The first $\gamma$ independent columns</li>
 </ol>
 
 
